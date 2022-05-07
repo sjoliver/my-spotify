@@ -69,25 +69,17 @@ app.get('/callback', (req, res) => {
   // spotify confirms authorization code validity, then responds with access token and refresh token
   .then(response => {
     if (response.status === 200) {
-      const { access_token, token_type } = response.data;
+      const { access_token, refresh_token } = response.data;
 
-      // use access token to request data from Spotify API
-      // axios.get('https://api.spotify.com/v1/me', {
-      //   headers: {
-      //     Authorization: `${token_type} ${access_token}`
-      //   }
-      // })
-      const { refresh_token } = response.data;
+      const queryParams = querystring.stringify({
+        access_token,
+        refresh_token,
+      });
 
-      axios.get(`http://localhost:8888/refresh_token?refresh_token=${refresh_token}`)
-        .then(response => {
-          res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
-        })
-        .catch(error => {
-          res.send(error);
-        });
+      res.redirect(`http://localhost:3000/?${queryParams}`);
+
     } else {
-      res.send(response);
+      res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
     }
   })
   .catch(error => {
