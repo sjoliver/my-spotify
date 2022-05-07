@@ -17,14 +17,36 @@ app.get('/', (req, res) => {
   res.json(data);
 });
 
+const generateRandomString = length => {
+  let text = '';
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
+
+const stateKey = 'spotify_auth_state';
+
 app.get('/login', (req, res) => {
+  const state = generateRandomString(16);
+  res.cookie(stateKey, state);
+
+  const scope = 'user-read-private user-read-email';
+
   const queryParans = querystring.stringify({
     client_id: CLIENT_ID,
     response_type: 'code',
-    redirect_uri: REDIRECT_URI
+    redirect_uri: REDIRECT_URI,
+    scope: scope,
+    state: state
   })
   res.redirect(`https://accounts.spotify.com/authorize?${queryParans}`);
 });
+
+app.get('/callback', (req, res) => {
+  res.send('Callback');
+})
 
 app.listen(port, () => {
   console.log(`Express app listening at http://localhost:${port}`);
