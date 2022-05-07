@@ -3,6 +3,10 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = 8888;
+const querystring = require('querystring');
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 app.get('/', (req, res) => {
   const data = {
@@ -11,8 +15,15 @@ app.get('/', (req, res) => {
   };
 
   res.json(data);
+});
 
-  console.log('hello')
+app.get('/login', (req, res) => {
+  const queryParans = querystring.stringify({
+    client_id: CLIENT_ID,
+    response_type: 'code',
+    redirect_uri: REDIRECT_URI
+  })
+  res.redirect(`https://accounts.spotify.com/authorize?${queryParans}`);
 });
 
 app.listen(port, () => {
