@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { accessToken } from '../spotify';
+import { accessToken } from './spotify';
 
 function App() {
   const [token, setToken] = useState(null);
