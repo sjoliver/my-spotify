@@ -1,9 +1,37 @@
-import './App.css';
+// import './App.css';
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
-import styled from 'styled-components/macro'; // use /macro to enable the Babel plugin
+import styled, { createGlobalStyle } from 'styled-components/macro'; // use /macro to enable the Babel plugin
+
+const StyledLoginButton = styled.a`
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px auto;
+  border-radius: 30px;
+  display: inline-block;
+`;
+
+const GlobalStyle = createGlobalStyle`
+  html {
+    box-sizing: border-box;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+  }
+`;
 
 // scroll to top of page when changing routes
 function ScrollToTop() {
@@ -14,16 +42,7 @@ function ScrollToTop() {
   }, [pathname]);
 
   return null;
-}
-
-const StyledLoginButton = styled.a`
-  background-color: green;
-  color: white;
-  padding: 10px 20px;
-  margin: 20px auto;
-  border-radius: 30px;
-  display: inline-block;
-`;
+};
 
 function App() {
   const [token, setToken] = useState(null);
@@ -47,6 +66,8 @@ function App() {
 
   return (
     <div className="App">
+      <GlobalStyle />
+
       <header className="App-header">
         {!token ? (
           <StyledLoginButton className="App-link" href="http://localhost:8888/login">
