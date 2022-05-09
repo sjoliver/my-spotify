@@ -107,3 +107,9 @@ const getAccessToken = () => {
 };
 
 export const accessToken = getAccessToken();
+
+// axios default request headers (see https://github.com/axios/axios#global-axios-defaults)
+// setting the base URL and HTTP request headers for every HTTP request made with axios
+axios.defaults.baseURL = 'https://api.spotify.com/v1';
+axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+axios.defaults.headers['Content-Type'] = 'application/json';
