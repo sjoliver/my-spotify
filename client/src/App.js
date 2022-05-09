@@ -5,16 +5,15 @@ import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
 import styled, { createGlobalStyle } from 'styled-components/macro'; // use /macro to enable the Babel plugin
 
-const StyledLoginButton = styled.a`
-  background-color: green;
-  color: white;
-  padding: 10px 20px;
-  margin: 20px auto;
-  border-radius: 30px;
-  display: inline-block;
-`;
-
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --black: #121212;
+    --green: #1DB954;
+    --white: #ffffff;
+
+    --font: 'Circular Std', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+
   html {
     box-sizing: border-box;
   }
@@ -31,6 +30,15 @@ const GlobalStyle = createGlobalStyle`
     background-color: black;
     color: white;
   }
+`;
+
+const StyledLoginButton = styled.a`
+  background-color: var(--green);
+  color: var(--white);
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 30px;
+  display: inline-block;
 `;
 
 // scroll to top of page when changing routes
