@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
 
@@ -31,19 +32,26 @@ function App() {
             Log in to Spotify
           </a>
         ) : (
-          <>
-            <button onClick={logout}>Log Out</button>
-
-            {profile && (
-              <div>
-                <h1>{profile.display_name}</h1>
-                <p>{profile.followers.total} Followers</p>
-                {profile.images.length && profile.images[0].url && (
-                  <img src={profile.images[0].url} alt="Avatar"/>
-                )}
-              </div>
-            )}
-          </>
+          <Router>
+            <Routes>
+              <Route path="/playlists/:id" element={<h1>Playlist</h1>} />
+              <Route path="/playlists" element={<h1>Playlists</h1>} />
+              <Route path="/" element={
+                <>
+                  <button onClick={logout}>Log Out</button>
+                  {profile && (
+                    <div>
+                      <h1>{profile.display_name}</h1>
+                      <p>{profile.followers.total} Followers</p>
+                      {profile.images.length && profile.images[0].url && (
+                        <img src={profile.images[0].url} alt="Avatar"/>
+                      )}
+                    </div>
+                  )}
+                </>
+              } />
+            </Routes>
+          </Router>
         )}
       </header>
     </div>
