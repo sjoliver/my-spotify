@@ -16,6 +16,15 @@ const LOCALSTORAGE_VALUES = {
   timestamp: window.localStorage.getItem(LOCALSTORAGE_KEYS.timestamp),
 };
 
+export const logout = () => {
+  // Clear all localStorage items
+  for (const property in LOCALSTORAGE_KEYS) {
+    window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
+  }
+  // Navigate to homepage
+  window.location = window.location.origin;
+};
+
 const hasTokenExpired = () => {
   const { accessToken, timestamp, expireTime } = LOCALSTORAGE_VALUES;
 
@@ -27,7 +36,7 @@ const hasTokenExpired = () => {
 
   // checks if amount of time elapsed since the timestamp is greater than the access token's expire time (3600 seconds)
   return (millisecondsElapsed / 1000) > Number(expireTime);
-}
+};
 
 // use refresh token in localStorage to hit the /refresh_token endpoint,
 // then update the values in localStorage with data from the response
