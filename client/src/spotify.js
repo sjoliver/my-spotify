@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // get request to retrieve currently logged-in user's profile -- base URL & global headers are defined at the bottom of this file
-export const getCurrentUserProfile = () => axios.get('/me')
+export const getCurrentUserProfile = () => axios.get('/me');
 
 // Map for localStorage keys
 const LOCALSTORAGE_KEYS = {
