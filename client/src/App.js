@@ -3,34 +3,8 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
-import styled, { createGlobalStyle } from 'styled-components/macro'; // use /macro to enable the Babel plugin
-
-const GlobalStyle = createGlobalStyle`
-  :root {
-    --black: #121212;
-    --green: #1DB954;
-    --white: #ffffff;
-
-    --font: 'Circular Std', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  }
-
-  html {
-    box-sizing: border-box;
-  }
-
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: black;
-    color: white;
-  }
-`;
+import { GlobalStyle } from './styles';
+import styled from 'styled-components/macro'; // use /macro to enable the Babel plugin
 
 const StyledLoginButton = styled.a`
   background-color: var(--green);
