@@ -3,6 +3,8 @@ import axios from "axios";
 // get request to retrieve currently logged-in user's profile -- base URL & global headers are defined at the bottom of this file
 export const getCurrentUserProfile = () => axios.get('/me');
 
+export const getCurrentUserPlaylists = () => axios.get('/me/playlists');
+
 // Map for localStorage keys
 const LOCALSTORAGE_KEYS = {
   accessToken: 'spotify_access_token',
