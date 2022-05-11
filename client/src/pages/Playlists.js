@@ -20,42 +20,50 @@ const Playlists = () => {
     catchErrors(fetchData());
   }, []);
 
-  const playlistObj = {
-    playlist1: {id: "track name", id2: "track name"},
-    playlist2: {id: "track name", id2: "track name"},
-    playlist3: {id: "track name", id2: "track name"},
-  }
-
-  const trackObj = {
-    trackId1: ["track name", "count"],
-    trackId2: ["track name", "count"],
-    trackId3: ["track name", "count"],
-  }
+  let playlistID = [];
 
   if (playlists) {
+    // create array of playlist ids
+    for (let playlist of playlists.items) {
+      playlistID.push(playlist.id)
+    }
 
+    // create array of playlist names
     playlistsList = playlists.items.map((playlist, index) => {
       return <li key={index}>{playlist.name}</li>
     })
-
-    // loop through playlists to grab a single playlist
-    for (let playlist of playlists.items) {
-      console.log("playlist:", playlist)
-
-      // get tracks from playlists
-      let playlistTracks = () => axios.get(`/playlists/${playlist.id}`);
-
-      // loop through tracks in each playlist
-      // if the track id exists in the object, increment the value
-      // if the track id does not exist in the object, add it to the object with the value of 1
-
-
-    }
-
-
-    // () => axios.get(`/playlists/${playlist.id}`);
- 
   }
+
+  let allTracks = {};
+
+  // create array of playlistEndpoints using their IDs
+  const playlistEndpoints = playlistID.map(id => `/playlists/${id}`);
+
+  // concurrently make an axios get requests for each endpoint 
+  axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)))
+    .then((response) => {
+
+      // loop through each playlist
+      for (let playlist of response) {
+
+        // playlist.data.tracks.items = array of track objects
+        let trackObj = playlist.data.tracks.items; 
+
+        for (const song of trackObj) {
+          if (song.track.id in allTracks) {
+            allTracks[song.track.id][1] += 1
+          } else {
+            allTracks[song.track.id] = [song.track.name, 1]
+          }
+        }
+      }
+
+    }).catch(error => console.log(error));
+
+    const allTracksArr = Object.values(allTracks);
+    console.log("hii", Object.values(allTracks))
+    console.log(allTracksArr); 
+
 
   return (
     <>
