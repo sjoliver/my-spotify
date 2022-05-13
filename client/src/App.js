@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+
 import { accessToken, logout } from './spotify';
 import { Login, Profile, Playlists } from './pages';
 import { GlobalStyle } from './styles';

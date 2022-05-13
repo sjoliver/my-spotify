@@ -1,25 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import { catchErrors } from '../utils';
 import { getCurrentUserPlaylists } from '../spotify';
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState(null);
+  const [topSongs, setTopSongs] = useState([]);
 
   let playlistsList = [];
-
-  useEffect(() => {
-    // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resoled -- we handle this by creating an async fn 
-    const fetchData = async () => {
-      const { data } = await getCurrentUserPlaylists();
-
-      setPlaylists(data);
-    };
-
-    // handles errors from async fn 
-    catchErrors(fetchData());
-  }, []);
-
   let playlistID = [];
 
   if (playlists) {
@@ -32,6 +21,7 @@ const Playlists = () => {
     playlistsList = playlists.items.map((playlist, index) => {
       return <li key={index}>{playlist.name}</li>
     })
+
   }
 
   let allTracks = {};
@@ -40,9 +30,10 @@ const Playlists = () => {
   let playlistEndpoints = playlistID.map(id => `/playlists/${id}`);
 
   // concurrently make an axios get requests for each endpoint 
-  const getTracks = axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)))
-    .then((playlists) => {
-
+  const getTracksTEST = async () => {
+    try {
+      const playlists = await axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)))
+      
       // loop through each playlist
       for (let playlist of playlists) {
 
@@ -59,32 +50,49 @@ const Playlists = () => {
       }
       
       const allTracksArr = Object.values(allTracks);
-      return allTracksArr;
-      
-    }).catch(error => console.log(error));
+      const sortedTracks = allTracksArr.sort((a, b) => b[1] - a[1]);
 
-    const top20 = async () => {
-      const trackArr = await getTracks;
-      const sortedTracks = trackArr.sort((a, b) => b[1] - a[1]);
-      console.log(sortedTracks.slice(0, 20));
-      return sortedTracks.slice(0, 20)
+      setTopSongs(sortedTracks.slice(0,20));
+
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+    useEffect(() => {
+      // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resoled -- we handle this by creating an async fn 
+      const fetchData = async () => {
+        const { data } = await getCurrentUserPlaylists();
+  
+        setPlaylists(data);
+      };
+
+      // handles errors from async fn 
+      catchErrors(fetchData());
+
+      getTracksTEST();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    let topSongsList;
+
+    if (topSongs.length > 1) {
+      // create array of playlist names
+      topSongsList = topSongs.map((topSong, index) => {
+        return <li key={index}>{topSong[0]}: {topSong[1]}</li>
+      });
     };
 
-    top20();
-
-    // let top20List;
-
-    // if (top20[0]) {
-    //   top20List = top20.map((track, index) => {
-    //     return <li key={index}>{track[0]}: {track[1]}</li>
-    //   })
-    // }
+    console.log("TOPPPPP",topSongsList)
 
   return (
     <>
       <ul>
         {playlistsList}
       </ul>
+      <ol>
+        {topSongsList}
+      </ol>
     </>
   )
 
