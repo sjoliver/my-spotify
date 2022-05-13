@@ -37,33 +37,48 @@ const Playlists = () => {
   let allTracks = {};
 
   // create array of playlistEndpoints using their IDs
-  const playlistEndpoints = playlistID.map(id => `/playlists/${id}`);
+  let playlistEndpoints = playlistID.map(id => `/playlists/${id}`);
 
   // concurrently make an axios get requests for each endpoint 
-  axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)))
-    .then((response) => {
+  const getTracks = axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)))
+    .then((playlists) => {
 
       // loop through each playlist
-      for (let playlist of response) {
+      for (let playlist of playlists) {
 
         // playlist.data.tracks.items = array of track objects
         let trackObj = playlist.data.tracks.items; 
 
         for (const song of trackObj) {
           if (song.track.id in allTracks) {
-            allTracks[song.track.id][1] += 1
+            allTracks[`${song.track.id}`][1] += 1
           } else {
-            allTracks[song.track.id] = [song.track.name, 1]
+            allTracks[`${song.track.id}`] = [song.track.name, 1]
           }
         }
       }
-
+      
+      const allTracksArr = Object.values(allTracks);
+      return allTracksArr;
+      
     }).catch(error => console.log(error));
 
-    const allTracksArr = Object.values(allTracks);
-    console.log("hii", Object.values(allTracks))
-    console.log(allTracksArr); 
+    const top20 = async () => {
+      const trackArr = await getTracks;
+      const sortedTracks = trackArr.sort((a, b) => b[1] - a[1]);
+      console.log(sortedTracks.slice(0, 20));
+      return sortedTracks.slice(0, 20)
+    };
 
+    top20();
+
+    // let top20List;
+
+    // if (top20[0]) {
+    //   top20List = top20.map((track, index) => {
+    //     return <li key={index}>{track[0]}: {track[1]}</li>
+    //   })
+    // }
 
   return (
     <>
