@@ -1,8 +1,17 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { catchErrors } from '../utils';
 import { getCurrentUserPlaylists } from '../spotify';
+
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
+require('react-dom');
+window.React2 = require('react');
+console.log(window.React1 === window.React2);
+
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState(null);
@@ -18,8 +27,8 @@ const Playlists = () => {
     }
 
     // create array of playlist names
-    playlistsList = playlists.items.map((playlist, index) => {
-      return <li key={index}>{playlist.name}</li>
+    playlistsList = playlists.items.map((playlist) => {
+      return <FormControlLabel control={<Checkbox />} label={`${playlist.name}`} />
     })
 
   }
@@ -83,13 +92,11 @@ const Playlists = () => {
       });
     };
 
-    console.log("TOPPPPP",topSongsList)
-
   return (
     <>
-      <ul>
+      <FormGroup>    
         {playlistsList}
-      </ul>
+      </FormGroup>
       <ol>
         {topSongsList}
       </ol>
