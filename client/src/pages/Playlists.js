@@ -12,25 +12,19 @@ require('react-dom');
 window.React2 = require('react');
 console.log(window.React1 === window.React2);
 
-
 const Playlists = () => {
   const [playlists, setPlaylists] = useState(null);
   const [topSongs, setTopSongs] = useState([]);
-
+  const [selected, setSelected] = useState([]);
+  
   let playlistsList = [];
   let playlistID = [];
-
+  
   if (playlists) {
     // create array of playlist ids
     for (let playlist of playlists.items) {
       playlistID.push(playlist.id)
     }
-
-    // create array of playlist names
-    playlistsList = playlists.items.map((playlist) => {
-      return <FormControlLabel control={<Checkbox />} label={`${playlist.name}`} />
-    })
-
   }
 
   let allTracks = {};
@@ -83,6 +77,33 @@ const Playlists = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const isAllSelected = playlistsList.length > 0 && selected.length === playlistsList.length;
+
+    const handleChange = (event) => {
+      const value = event.target.value
+      console.log("VALUE:", value)
+      if (value === 'all') {
+        setSelected(selected.length === playlistsList.length ? [] : playlistsList);
+        return;
+      }
+  
+      const list = [...selected];
+      const index = list.indefOf(value);
+      index === -1 ? list.push(value) : list.splice(index, 1)
+      setSelected(list);
+    }
+
+    if (playlists) {
+      // create array of playlist names
+      playlistsList = playlists.items.map((playlist, index) => {
+      return (
+        <div key={index}>
+          <FormControlLabel control={<Checkbox value={playlist} onChange={handleChange} checked={selected.includes(playlist)} />} label={`${playlist.name}`} />
+        </div>
+        )
+    })
+    }
+
     let topSongsList;
 
     if (topSongs.length > 1) {
@@ -94,7 +115,8 @@ const Playlists = () => {
 
   return (
     <>
-      <FormGroup>    
+      <FormGroup>
+        <FormControlLabel control={<Checkbox value="all" onChange={handleChange} checked={isAllSelected} />} label={"Select All"} />
         {playlistsList}
       </FormGroup>
       <ol>
