@@ -82,6 +82,7 @@ const Playlists = () => {
     const handleChange = (event) => {
       const value = event.target.value
       console.log("VALUE:", value)
+
       if (value === 'all') {
         setSelected(selected.length === playlistsList.length ? [] : playlistsList);
         return;
@@ -96,12 +97,12 @@ const Playlists = () => {
     if (playlists) {
       // create array of playlist names
       playlistsList = playlists.items.map((playlist, index) => {
-      return (
+        return (
         <div key={index}>
           <FormControlLabel control={<Checkbox value={playlist} onChange={handleChange} checked={selected.includes(playlist)} />} label={`${playlist.name}`} />
         </div>
         )
-    })
+      })
     }
 
     let topSongsList;
