@@ -8,26 +8,28 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-require('react-dom');
-window.React2 = require('react');
-console.log(window.React1 === window.React2);
-
 const Playlists = () => {
-  const [playlists, setPlaylists] = useState(null);
+  const [playlists, setPlaylists] = useState([]);
   const [topSongs, setTopSongs] = useState([]);
-  const [selected, setSelected] = useState([]);
   
   let playlistsList = [];
   let playlistID = [];
+  let allTracks = {};
+  let options;
   
-  if (playlists) {
+  if (playlists.length > 1) {
     // create array of playlist ids
     for (let playlist of playlists.items) {
       playlistID.push(playlist.id)
     }
-  }
 
-  let allTracks = {};
+    options = playlists.items.map(playlist => playlist.name)
+  }
+  
+  // create array equal to the length of the number of checkboxes using the array "fill" method
+  const [checkedState, setCheckedState] = useState(
+    playlists.length > 1 ? new Array(options.length).fill(false) : []
+  );
 
   // create array of playlistEndpoints using their IDs
   let playlistEndpoints = playlistID.map(id => `/playlists/${id}`);
@@ -62,62 +64,55 @@ const Playlists = () => {
     }
   }
 
-    useEffect(() => {
-      // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resoled -- we handle this by creating an async fn 
-      const fetchData = async () => {
-        const { data } = await getCurrentUserPlaylists();
-  
-        setPlaylists(data);
-      };
+  useEffect(() => {
+    // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resoled -- we handle this by creating an async fn 
+    const fetchData = async () => {
+      const { data } = await getCurrentUserPlaylists();
 
-      // handles errors from async fn 
-      catchErrors(fetchData());
-
-      getTracksTEST();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const isAllSelected = playlistsList.length > 0 && selected.length === playlistsList.length;
-
-    const handleChange = (event) => {
-      const value = event.target.value
-      console.log("VALUE:", value)
-
-      if (value === 'all') {
-        setSelected(selected.length === playlistsList.length ? [] : playlistsList);
-        return;
-      }
-  
-      const list = [...selected];
-      const index = list.indefOf(value);
-      index === -1 ? list.push(value) : list.splice(index, 1)
-      setSelected(list);
-    }
-
-    if (playlists) {
-      // create array of playlist names
-      playlistsList = playlists.items.map((playlist, index) => {
-        return (
-        <div key={index}>
-          <FormControlLabel control={<Checkbox value={playlist} onChange={handleChange} checked={selected.includes(playlist)} />} label={`${playlist.name}`} />
-        </div>
-        )
-      })
-    }
-
-    let topSongsList;
-
-    if (topSongs.length > 1) {
-      // create array of playlist names
-      topSongsList = topSongs.map((topSong, index) => {
-        return <li key={index}>{topSong[0]}: {topSong[1]}</li>
-      });
+      setPlaylists(data);
     };
+
+    // handles errors from async fn 
+    catchErrors(fetchData());
+
+    getTracksTEST();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = (event) => {
+    const updatedCheckedState = checkedState.map((item, index) => 
+      index === event ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+  }
+
+  if (playlists.length > 1) {
+    // create array of playlist names
+    playlistsList = playlists.items.map((playlist, index) => {
+      return (
+        <div key={index}>
+          <FormControlLabel 
+            control={<Checkbox checked={checkedState[index]} onChange={() => handleChange(index)}/>} 
+            label={`${playlist.name}`} 
+          />
+        </div>
+      )
+    })
+  }
+
+  let topSongsList;
+
+  if (topSongs.length > 1) {
+    // create array of playlist names
+    topSongsList = topSongs.map((topSong, index) => {
+      return <li key={index}>{topSong[0]}: {topSong[1]}</li>
+    });
+  };
 
   return (
     <>
       <FormGroup>
-        <FormControlLabel control={<Checkbox value="all" onChange={handleChange} checked={isAllSelected} />} label={"Select All"} />
         {playlistsList}
       </FormGroup>
       <ol>
