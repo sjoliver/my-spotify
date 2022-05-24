@@ -9,7 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 const Playlists = () => {
-  const [playlists, setPlaylists] = useState([]);
+  const [playlists, setPlaylists] = useState();
 
   useEffect(() => {
     // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resolved -- we handle this by creating an async fn 
@@ -19,12 +19,12 @@ const Playlists = () => {
       setPlaylists(data);
     };
 
+    fetchData();
+
     // handles errors from async fn 
     catchErrors(fetchData());
 
   }, []);
-
-  console.log("PLAYLISTS", playlists)
 
   return (
     <>
@@ -38,7 +38,6 @@ const Playlists = () => {
       <TopSongs playlists={playlists} />
     </>
   )
-
 }
 
 export default Playlists;

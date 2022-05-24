@@ -9,7 +9,7 @@ const TopSongs = (props) => {
   let allTracks = {};
   
   // create array of playlist ids
-  if (playlists.length > 1) {
+  if (playlists) {
     for (let playlist of playlists.items) {
       playlistID.push(playlist.id)
     }
