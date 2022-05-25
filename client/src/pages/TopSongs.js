@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { catchErrors } from '../utils';
 
 const TopSongs = (props) => {
   const [topSongs, setTopSongs] = useState([]);
@@ -17,10 +18,11 @@ const TopSongs = (props) => {
 
   // create array of playlist endpoints using their IDs
   let playlistEndpoints = playlistID.map(id => `/playlists/${id}`);
-
-  // concurrent GET requests using axios for each endpoint 
-  const getTracks = async () => {
-    try {
+  
+  useEffect(() => {
+    // concurrent GET requests using axios for each endpoint 
+    const getTracks = async () => {
+      
       const playlists = await axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)))
       
       // loop through each playlist
@@ -42,36 +44,32 @@ const TopSongs = (props) => {
       const sortedTracks = allTracksArr.sort((a, b) => b[1] - a[1]);
 
       setTopSongs(sortedTracks.slice(0,20));
-
-    } catch(err) {
-      console.log(err)
+  
     }
-  }
 
-  useEffect(() => {
+    catchErrors(getTracks())
+
     getTracks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let topSongsList;
 
-  if (playlists) {
-
-     // LIST OF TOP SONGS
-     topSongsList = topSongs.map((topSong, index) => {
-      return <li key={index}>{topSong[0]}: {topSong[1]}</li>
-    });
-
-    console.log("top songs", topSongsList)
-  }
-
+  // if (playlists) {
+  //   // LIST OF TOP SONGS
+  //   topSongsList = topSongs.map((topSong, index) => {
+  //     return <li key={index}>{topSong[0]}: {topSong[1]}</li>
+  //   });
+  // }
 
   return (
-    <>
+    <div>
       <ol>
-        {topSongsList}
+        {playlists ? topSongs.map((topSong, index) => {
+          return <li key={index}>{topSong[0]}: {topSong[1]}</li>
+        }): []}
       </ol>
-    </>
+    </div>
   )
 
 
