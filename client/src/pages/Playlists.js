@@ -13,6 +13,7 @@ const Playlists = () => {
   const [checkedState, setCheckedState] = useState(
     new Array(20).fill(false)
   );
+  const [checkedPlaylists, setCheckedPlaylists] = useState([]);
 
   useEffect(() => {
     // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resolved -- we handle this by creating an async fn 
@@ -29,15 +30,25 @@ const Playlists = () => {
 
   }, []);
 
-  const handleChange = (position) => {
+  const handleChange = (position, id) => {
     const updatedCheckedState = checkedState.map((item, index) => 
       index === position ? !item : item
     );
 
+    if (checkedState[position] === false) {
+      setCheckedPlaylists((prev) => [...prev, id])
+    } else {
+      for (let i = 0; i < checkedPlaylists.length; i++) {
+        if (checkedPlaylists[i] === id) {
+          setCheckedPlaylists((prev) => [...prev].splice(i, 1))
+        }
+      }
+    }
+
     setCheckedState(updatedCheckedState);
   }
 
-  console.log("checked", checkedState)
+  console.log('playlist ids', checkedPlaylists)
 
   return (
     <>
@@ -48,7 +59,7 @@ const Playlists = () => {
               control={
                 <Checkbox 
                   checked={checkedState[index]} 
-                  onChange={() => handleChange(index)}
+                  onChange={() => handleChange(index, playlist.id)}
                 />
               } 
               label={`${playlist.name}`} 
