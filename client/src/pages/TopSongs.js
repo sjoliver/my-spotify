@@ -7,7 +7,6 @@ const TopSongs = (props) => {
   const {playlists} = props
 
   let playlistID = [];
-  let allTracks = {};
   
   // create array of playlist ids
   if (playlists) {
@@ -23,6 +22,7 @@ const TopSongs = (props) => {
     // concurrent GET requests using axios for each endpoint 
     const getTracks = async () => {
       
+      let allTracks = {};
       const playlists = await axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)))
       
       // loop through each playlist
@@ -44,7 +44,6 @@ const TopSongs = (props) => {
       const sortedTracks = allTracksArr.sort((a, b) => b[1] - a[1]);
 
       setTopSongs(sortedTracks.slice(0,20));
-  
     }
 
     catchErrors(getTracks())
@@ -52,15 +51,6 @@ const TopSongs = (props) => {
     getTracks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  let topSongsList;
-
-  // if (playlists) {
-  //   // LIST OF TOP SONGS
-  //   topSongsList = topSongs.map((topSong, index) => {
-  //     return <li key={index}>{topSong[0]}: {topSong[1]}</li>
-  //   });
-  // }
 
   return (
     <div>
@@ -71,8 +61,6 @@ const TopSongs = (props) => {
       </ol>
     </div>
   )
-
-
 }
 
 export default TopSongs;
