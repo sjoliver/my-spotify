@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from "react-hook-form";
 
 import TopSongs from './TopSongs';
 import { catchErrors } from '../utils';
@@ -9,8 +8,8 @@ const Playlists = () => {
   const [playlists, setPlaylists] = useState();
   const [checkedState, setCheckedState] = useState(new Array(20).fill(false));
   const [checkedPlaylists, setCheckedPlaylists] = useState([]);
-  const { handleSubmit } = useForm();
-  const onSubmit = data => console.log(data);
+  // const { handleSubmit } = useForm();
+  // const onSubmit = data => console.log(data);
 
   useEffect(() => {
     // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resolved -- we handle this by creating an async fn 
@@ -45,11 +44,16 @@ const Playlists = () => {
     setCheckedState(updatedCheckedState);
   }
 
+
+  const handleSubmit = () => {
+
+  }
+
   return (
     <>
       <h3>Select Playlists</h3>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ul className='playlists-list' style={{"list-style": "none"}}>
+      <form onSubmit={handleSubmit}>
+        <ul className='playlists-list' style={{"listStyle": "none"}}>
           {playlists?.items.map((playlist, index) => {
             return (
               <li key={index}>
