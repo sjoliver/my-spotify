@@ -4,7 +4,7 @@ import { catchErrors } from '../utils';
 
 const TopSongs = (props) => {
   const [topSongs, setTopSongs] = useState([]);
-  const {playlists} = props
+  const {playlists} = props;
 
   let playlistID = [];
   
