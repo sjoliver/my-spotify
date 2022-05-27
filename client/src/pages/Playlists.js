@@ -9,7 +9,7 @@ const Playlists = () => {
   const [playlists, setPlaylists] = useState();
   const [checkedState, setCheckedState] = useState(new Array(20).fill(false));
   const [checkedPlaylists, setCheckedPlaylists] = useState([]);
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { handleSubmit } = useForm();
   const onSubmit = data => console.log(data);
 
   useEffect(() => {
