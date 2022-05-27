@@ -1,10 +1,13 @@
-require('dotenv').config();
+import dotenv from 'dotenv'
+dotenv.config()
 
-const express = require('express');
+import express from 'express' 
 const app = express();
 const port = 8888;
-const querystring = require('querystring');
-const axios = require('axios');
+
+import querystring from 'querystring'
+import axios from 'axios';
+
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
