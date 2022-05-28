@@ -20,7 +20,7 @@ const TopSongs = (props) => {
 
   
   useEffect(() => {
-    console.log("hey")
+    // console.log("hey")
 
     let allTracks = {};
 
@@ -29,14 +29,14 @@ const TopSongs = (props) => {
       
       const playlists = await axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)))
       
-      console.log("SUP")
+      // console.log("SUP")
 
       // loop through each playlist
       for (let playlist of playlists) {
 
         // playlist.data.tracks.items = array of track objects
         let trackObj = playlist.data.tracks.items; 
-        console.log("YO")
+        // console.log("YO")
 
         for (const song of trackObj) {
           if (song.track.id in allTracks) {
@@ -47,7 +47,7 @@ const TopSongs = (props) => {
         }
       }
 
-      console.log("FUCK")
+      // console.log("FUCK")
       
       const allTracksArr = Object.values(allTracks);
       const sortedTracks = allTracksArr.sort((a, b) => b[1] - a[1]);
@@ -55,7 +55,7 @@ const TopSongs = (props) => {
       setTopSongs(sortedTracks.slice(0,20));
     }
 
-    console.log("SHIT")
+    // console.log("SHIT")
 
     catchErrors(getTracks())
 
@@ -63,7 +63,7 @@ const TopSongs = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("UR MOM")
+  // console.log("UR MOM")
 
   return (
     <div>
