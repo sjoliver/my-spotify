@@ -7,9 +7,7 @@ import { getCurrentUserPlaylists } from '../spotify';
 const Playlists = () => {
   const [playlists, setPlaylists] = useState();
   const [checkedState, setCheckedState] = useState(new Array(20).fill(false));
-  const [checkedPlaylists, setCheckedPlaylists] = useState([]);
-  // const { handleSubmit } = useForm();
-  // const onSubmit = data => console.log(data);
+  const [checkedPlaylists, setCheckedPlaylists] = useState({});
 
   useEffect(() => {
     // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resolved -- we handle this by creating an async fn 
@@ -31,19 +29,26 @@ const Playlists = () => {
       index === position ? !item : item
     );
 
-    if (checkedState[position] === false) {
-      setCheckedPlaylists((prev) => [...prev, id])
-    } else {
-      for (let i = 0; i < checkedPlaylists.length; i++) {
-        if (checkedPlaylists[i] === id) {
-          setCheckedPlaylists((prev) => [...prev].splice(i, 1))
-        }
-      }
-    }
-
     setCheckedState(updatedCheckedState);
+
+    // if box is checked, add id to state
+    // if box is unchecked, remove id from state 
+    if (updatedCheckedState[position]) {
+      setCheckedPlaylists(prev => {
+        return {
+          ...prev,
+          [position]: id
+        }
+      })
+    } else {
+      setCheckedPlaylists(prev => {
+        delete checkedPlaylists[position]
+        return { ...prev }
+      })
+    }
   }
 
+  console.log("###",checkedPlaylists)
 
   const handleSubmit = () => {
 
