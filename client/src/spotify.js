@@ -3,7 +3,11 @@ import axios from "axios";
 // get request to retrieve currently logged-in user's profile -- base URL & global headers are defined at the bottom of this file
 export const getCurrentUserProfile = () => axios.get('/me');
 
-export const getCurrentUserPlaylists = () => axios.get('/me/playlists');
+export const getCurrentUserPlaylists = () => axios.get('/me/playlists?limit=50');
+
+const endpoints = ['/playlists/76BkrMF63WbKNrpMu9uyWD', '/playlists/59POna4pFKRE0lwSiKrTC2']
+
+export const getTestPlaylists = () => axios.all(endpoints.map((endpoint) => axios.get(endpoint)));
 
 // Map for localStorage keys
 const LOCALSTORAGE_KEYS = {
