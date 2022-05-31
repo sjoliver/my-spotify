@@ -102,7 +102,7 @@ const Playlists = () => {
         <ul className='playlists-list' style={{"listStyle": "none"}}>
           {playlists?.items.map((playlist, index) => {
             return (
-              <li key={index}>
+              <li key={playlist + index}>
                 <div className='playlists-list-item'>
                   <input 
                     type='checkbox'
@@ -125,7 +125,7 @@ const Playlists = () => {
       <div>
       <ol>
         {playlists ? topSongs.map((topSong, index) => {
-          return <li key={index}>{topSong[0]}: {topSong[1]}</li>
+          return <li key={topSong+index}>{topSong[0]}: {topSong[1]}</li>
         }): []}
       </ol>
     </div>
