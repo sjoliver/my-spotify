@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-// import TopSongs from './TopSongs';
 import { catchErrors } from '../utils';
-import { getCurrentUserPlaylists, getTestPlaylists } from '../spotify';
+import { getCurrentUserPlaylists } from '../spotify';
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState();
-  const [test, setTest] = useState();
   const [checkedState, setCheckedState] = useState(new Array(20).fill(false));
   const [checkedPlaylists, setCheckedPlaylists] = useState({});
   const [topSongs, setTopSongs] = useState([]);
@@ -20,19 +18,10 @@ const Playlists = () => {
       setPlaylists(data);
     };
 
-    const testData = async () => {
-      const { data } = await getTestPlaylists();
-
-      setTest(data);
-    }
-
     fetchData();
-
-    testData();
 
     // handles errors from async fn 
     catchErrors(fetchData());
-    catchErrors(testData());
 
   }, []);
 
@@ -66,6 +55,8 @@ const Playlists = () => {
   let playlistIds = Object.values(checkedPlaylists)
   let playlistEndpoints = playlistIds.map(id => `/playlists/${id}`);
 
+  // function to run after submit button is clicked
+  // grabs selected playlists' data, counts duplicate records and sets the top songs state array
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -74,54 +65,34 @@ const Playlists = () => {
     // concurrent GET requests using axios for each endpoint 
     const getTracks = async () => {
       
-      // get playlists
       // playlists = array of playlist objects
-      const playlists = await axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)))
+      const playlists = await axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)));
 
-      console.log("playlists", playlists)
-
-  
-      // put playlist songs into array
-
-      // count duplicates 
-
-      const playlistArr = [];
-
-      for (let playlist of playlists) {
-
-        playlistArr.push(playlist.data.tracks.items)
-
-      }
-
-
-
-      
       // loop through each playlist
       for (let playlist of playlists) {
 
         // playlist.data.tracks.items = array of track objects
-        let trackObj = playlist.data.tracks.items; 
+        let trackArr = playlist.data.tracks.items; 
 
-        for (const song of trackObj) {
-          if (allTracks[song.track.id] === undefined) {
-            allTracks[`${song.track.id}`] = [song.track.name, 1]
+        for (const song of trackArr) {
+          if (allTracks[song.track.id]) {
+            allTracks[song.track.id][1] += 1
           } else {
-            allTracks[`${song.track.id}`][1] += 1
+            allTracks[song.track.id] = [song.track.name, 1]
           }
         }
       }
 
-      console.log("**", allTracks)
-      
+      // create array of song.name/count arrays
       const allTracksArr = Object.values(allTracks);
-      const sortedTracks = allTracksArr.sort((a, b) => b[1] - a[1]);
 
+      // create new array that's sorted by highest to lowest count
+      const sortedTracks = allTracksArr.sort((a, b) => b[1] - a[1]);
+  
+      // set top songs state array and slice it at 20 element
       setTopSongs(sortedTracks.slice(0,20));
     }
-
-    catchErrors(getTracks())
-
-    getTracks();
+    catchErrors(getTracks());
   }
 
   return (
