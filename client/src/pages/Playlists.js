@@ -80,7 +80,7 @@ const Playlists = () => {
           if (allTracks[song.track.id]) {
             allTracks[song.track.id][1] += 1
           } else {
-            allTracks[song.track.id] = [song.track.name, 1]
+            allTracks[song.track.id] = [song.track.name, 1, song.track.album.images[2].url,song.track.artists[0].name]
           }
         }
       }
@@ -127,16 +127,26 @@ const Playlists = () => {
         </div>
         {topSongs && 
           <div className='topsongs-list-wrapper'>
-            <h2 className='titles'>Top Songs</h2>
-            <ol className='topsongs-list'>
-              {topSongs?.map((topSong, index) => {
+            <h2 className='titles' id='topsongs-title'>Top Songs</h2>
+            <table className='topsongs-table'>
+              {topSongs?.map((topSong, index)=> {
                 return (
-                  <li key={topSong+index} className='topsongs-list-item'>
-                    {topSong[0]}: {topSong[1]}
-                  </li>
+                  <tr key={topSong+index} className='topsongs-row-item'>
+                    <td className='td-rank-number'><strong>{index + 1}</strong></td>
+                    <td className='space'></td>
+                    <td className='td-album-cover'><img className='album-cover-img' src={topSong[2]} alt='Album Cover'/></td>
+                    <td className='space'></td>
+                    <td className='td-song'>
+                      <div className='song-wrapper'>
+                        <div className='song-title'>{topSong[0]}</div>
+                        <div className='song-artist'>{topSong[3]}</div>
+                      </div>
+                    </td>
+                    <td className='td-count'>{topSong[1]}</td>
+                  </tr>
                 )
               })}
-            </ol>
+            </table>
           </div>
         }
       </div>
