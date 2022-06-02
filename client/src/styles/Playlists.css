@@ -1,0 +1,52 @@
+#page-title {
+  text-align: center;
+  padding: 1em;
+}
+
+h2.titles {
+  text-align: center;
+}
+
+div.content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 4em;
+}
+
+ul.playlists-list {
+  list-style: none;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+li.playlists-list-item {
+  padding: 3px;
+}
+
+input.checkbox-item {
+  margin-right: 7px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+button.submit-btn {
+  display: flex;
+  align-self: flex-end;
+}
+
+li.topsongs-list-item {
+  padding: 3px;
+}
+
+div.topsongs-list-wrapper {
+  background-color: #1DB954;
+  width: fit-content;
+  height: fit-content;
+  padding: 1em;
+  border-radius: 20px;
+}
