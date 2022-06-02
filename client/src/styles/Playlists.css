@@ -39,51 +39,55 @@ button.submit-btn {
   align-self: flex-end;
 }
 
-table.topsongs-table {
+.topsongs-container {
   width: 80%;
 }
 
-tr.topsongs-row-item {
+.track-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding: 5px;
+  height: 70px;
   border: 1px solid transparent;
   border-radius: 4px;
-  height: 56px;
+  height: 90px;
 }
 
-tr.topsongs-row-item:hover {
+.track-row:hover {
   background-color: #282828;
   border: 1px solid transparent;
   border-radius: 4px;
-  height: 56px;
+  height: 90px;
 }
 
-td.td-rank-number {
+.rank-number {
   width: 15px;
+  margin-right: 25px;
 }
 
-td.space {
-  min-width: 5px;
-}
-
-td.td-album-cover {
+.album-cover {
   width: 100px;
+  margin-right: 5px;
 }
 
-img.album-cover-img {
+.album-cover-img {
   height: 64px;
   width: 64px;
 }
 
-td.td-song {
+.track {
   width: 400px;
+  margin-right: 25px;
 }
 
-div.song-title {
+.track-title {
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-div.song-artist {
+.track-artist {
   color: #b3b3b3;
 }
 
