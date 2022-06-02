@@ -39,14 +39,60 @@ button.submit-btn {
   align-self: flex-end;
 }
 
-li.topsongs-list-item {
-  padding: 3px;
+table.topsongs-table {
+  width: 80%;
+}
+
+tr.topsongs-row-item {
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  height: 56px;
+}
+
+tr.topsongs-row-item:hover {
+  background-color: #282828;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  height: 56px;
+}
+
+td.td-rank-number {
+  width: 15px;
+}
+
+td.space {
+  min-width: 5px;
+}
+
+td.td-album-cover {
+  width: 100px;
+}
+
+img.album-cover-img {
+  height: 64px;
+  width: 64px;
+}
+
+td.td-song {
+  width: 400px;
+}
+
+div.song-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+div.song-artist {
+  color: #b3b3b3;
 }
 
 div.topsongs-list-wrapper {
-  background-color: #1DB954;
   width: fit-content;
   height: fit-content;
   padding: 1em;
-  border-radius: 20px;
+}
+
+div.topsongs-list-wrapper:hover {
+
 }
