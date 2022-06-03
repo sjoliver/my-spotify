@@ -97,6 +97,8 @@ const Playlists = () => {
     catchErrors(getTracks());
   }
 
+  console.log('playlists', playlists)
+
   return (
     <>
       <h2 id='page-title'>Playlist Analysis</h2>
@@ -117,7 +119,10 @@ const Playlists = () => {
                       checked={checkedState[index]}
                       onChange={() => handleChange(index, playlist.id)}
                     />
-                    <label htmlFor={`custom-checkbox-${index}`}>{playlist.name}</label>
+                    <label htmlFor={`custom-checkbox-${index}`}>
+                      <img className='album-cover-img' src={playlist.images[2].url} alt='Playlist Cover'/>
+                      {playlist.name}
+                    </label>
                   </li>
                 )
               })}
@@ -128,25 +133,23 @@ const Playlists = () => {
         {topSongs && 
           <div className='topsongs-list-wrapper'>
             <h2 className='titles' id='topsongs-title'>Top Songs</h2>
-            <table className='topsongs-table'>
+            <div className='topsongs-container'>
               {topSongs?.map((topSong, index)=> {
-                return (
-                  <tr key={topSong+index} className='topsongs-row-item'>
-                    <td className='td-rank-number'><strong>{index + 1}</strong></td>
-                    <td className='space'></td>
-                    <td className='td-album-cover'><img className='album-cover-img' src={topSong[2]} alt='Album Cover'/></td>
-                    <td className='space'></td>
-                    <td className='td-song'>
-                      <div className='song-wrapper'>
-                        <div className='song-title'>{topSong[0]}</div>
-                        <div className='song-artist'>{topSong[3]}</div>
+                  return (
+                    <div key={topSong+index} role="row" className='track-row-wrapper'>
+                      <div className='track-row'>
+                        <div className='rank-number'><strong>{index + 1}</strong></div>
+                        <div className='album-cover'><img className='album-cover-img' src={topSong[2]} alt='Album Cover'/></div>
+                        <div className='track'>
+                          <div className='track-title'>{topSong[0]}</div>
+                          <div className='track-artist'>{topSong[3]}</div>
+                        </div>
+                        <div className='count-number'>{topSong[1]}</div>
                       </div>
-                    </td>
-                    <td className='td-count'>{topSong[1]}</td>
-                  </tr>
-                )
+                    </div>
+                  )
               })}
-            </table>
+            </div>
           </div>
         }
       </div>
