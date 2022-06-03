@@ -97,6 +97,8 @@ const Playlists = () => {
     catchErrors(getTracks());
   }
 
+  console.log('playlists', playlists)
+
   return (
     <>
       <h2 id='page-title'>Playlist Analysis</h2>
@@ -117,7 +119,10 @@ const Playlists = () => {
                       checked={checkedState[index]}
                       onChange={() => handleChange(index, playlist.id)}
                     />
-                    <label htmlFor={`custom-checkbox-${index}`}>{playlist.name}</label>
+                    <label htmlFor={`custom-checkbox-${index}`}>
+                      <img className='album-cover-img' src={playlist.images[2].url} alt='Playlist Cover'/>
+                      {playlist.name}
+                    </label>
                   </li>
                 )
               })}
