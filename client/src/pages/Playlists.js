@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
 import axios from 'axios';
 
 import { catchErrors } from '../utils';
@@ -8,7 +9,7 @@ import '../styles/Playlists.css'
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState();
-  const [checkedState, setCheckedState] = useState(new Array(20).fill(false));
+  const [checkedState, setCheckedState] = useState(new Array(10).fill(false));
   const [checkedPlaylists, setCheckedPlaylists] = useState({});
   const [topSongs, setTopSongs] = useState();
 
@@ -99,12 +100,34 @@ const Playlists = () => {
 
   console.log('playlists', playlists)
 
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const options = playlists?.items.map(playlist => {
+    const container = {};
+    container.value = playlist.name
+    container.label = playlist.name
+    return container
+  })
+
+  console.log("OPTIONS",options)
+
   return (
     <>
       <h2 id='page-title'>Playlist Analysis</h2>
       <div className='content-container'>
         <div className='form-wrapper'>
           <h2 className='titles'>Select Playlists</h2>
+          <form onSubmit={handleSubmit} className='form'>
+            {playlists && 
+              <Select
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
+                options={options}
+              />
+            }
+          </form>
+
+
           <form onSubmit={handleSubmit} className='form'>
             <ul className='playlists-list'>
               {playlists?.items.map((playlist, index) => {
