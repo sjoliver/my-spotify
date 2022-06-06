@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import Select from 'react-select';
 import axios from 'axios';
+
+import Select from 'react-select'
 
 import { catchErrors } from '../utils';
 import { getCurrentUserPlaylists } from '../spotify';
 
 import '../styles/Playlists.css'
 
+
 const Playlists = () => {
   const [playlists, setPlaylists] = useState();
-  const [checkedState, setCheckedState] = useState(new Array(10).fill(false));
-  const [checkedPlaylists, setCheckedPlaylists] = useState({});
   const [topSongs, setTopSongs] = useState();
+  const [selectedOption, setSelectedOption] = useState();
+
+  const options = playlists?.items.map(playlist => {
+    const container = {};
+    container.value = playlist.name
+    container.label = playlist.name
+    return container
+  });
+
+  const handleChange = (event) => {
+    let value = Array.from(event.target.options).filter(o => o.selected).map(o => o.value)
+
+    setSelectedOption(value);
+  }
 
   useEffect(() => {
     // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resolved -- we handle this by creating an async fn 
@@ -28,34 +42,8 @@ const Playlists = () => {
 
   }, []);
 
-  const handleChange = (position, id) => {
-
-    // when a box is a checked, a new array for state is created
-    const updatedCheckedState = checkedState.map((item, index) => 
-      index === position ? !item : item
-    );
-
-    setCheckedState(updatedCheckedState);
-
-    // if box is checked, add id to state
-    // if box is unchecked, remove id from state 
-    if (updatedCheckedState[position]) {
-      setCheckedPlaylists(prev => {
-        return {
-          ...prev,
-          [position]: id
-        }
-      })
-    } else {
-      setCheckedPlaylists(prev => {
-        delete checkedPlaylists[position]
-        return { ...prev }
-      })
-    }
-  }
-
   // create array of playlist IDs > use playlist ID array to create endpoint array 
-  let playlistIds = Object.values(checkedPlaylists)
+  let playlistIds = Object.values(selectedOption);
   let playlistEndpoints = playlistIds.map(id => `/playlists/${id}`);
 
   // function to run after submit button is clicked
@@ -98,19 +86,6 @@ const Playlists = () => {
     catchErrors(getTracks());
   }
 
-  console.log('playlists', playlists)
-
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const options = playlists?.items.map(playlist => {
-    const container = {};
-    container.value = playlist.name
-    container.label = playlist.name
-    return container
-  })
-
-  console.log("OPTIONS",options)
-
   return (
     <>
       <h2 id='page-title'>Playlist Analysis</h2>
@@ -118,38 +93,13 @@ const Playlists = () => {
         <div className='form-wrapper'>
           <h2 className='titles'>Select Playlists</h2>
           <form onSubmit={handleSubmit} className='form'>
-            {playlists && 
-              <Select
-                defaultValue={selectedOption}
-                onChange={setSelectedOption}
-                options={options}
-              />
-            }
-          </form>
-
-
-          <form onSubmit={handleSubmit} className='form'>
-            <ul className='playlists-list'>
-              {playlists?.items.map((playlist, index) => {
-                return (
-                  <li key={playlist + index} className='playlists-list-item'>
-                    <input 
-                      type='checkbox'
-                      className='checkbox-item'
-                      id={`custom-checkbox-${index}`}
-                      name={playlist.name}
-                      value={playlist.name}
-                      checked={checkedState[index]}
-                      onChange={() => handleChange(index, playlist.id)}
-                    />
-                    <label htmlFor={`custom-checkbox-${index}`}>
-                      <img className='album-cover-img' src={playlist.images[2].url} alt='Playlist Cover'/>
-                      {playlist.name}
-                    </label>
-                  </li>
-                )
-              })}
-            </ul>
+            <Select 
+              defaultValue={selectedOption}
+              onChange={handleChange}
+              options={options} 
+              isMulti
+              name='playlists'
+            />
             <button className='submit-btn' type='submit'>Analyze</button>
           </form>
         </div>
