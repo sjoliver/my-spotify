@@ -1,0 +1,23 @@
+.profile-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile-img {
+  height: 150px;
+  width: 95px;
+}
+
+.profile-img-wrapper {
+  display: inline-block; 
+  position: relative; 
+  width: 100px; 
+  height: 100px; 
+  overflow: hidden; 
+  border-radius: 50%; 
+}
+
+/* .profile-img-wrapper img {
+  margin-top: -50px;
+} */
