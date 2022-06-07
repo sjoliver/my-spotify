@@ -101,7 +101,6 @@ const Playlists = () => {
 
   return (
     <>
-      <h2 id='page-title'>Playlist Analysis</h2>
       <div className='content-container'>
         <div className='form-wrapper'>
           <h2 className='titles'>Select Playlists</h2>
