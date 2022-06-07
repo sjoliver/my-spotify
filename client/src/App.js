@@ -8,9 +8,9 @@ import styled from 'styled-components/macro';
 import './styles/App.css'
 
 const StyledLogoutButton = styled.button`
-  position: absolute;
+  /* position: absolute;
   top: var(--spacing-sm);
-  right: var(--spacing-md);
+  right: var(--spacing-md); */
   padding: var(--spacing-xs) var(--spacing-sm);
   background-color: rgba(0,0,0,.7);
   color: var(--white);
@@ -50,7 +50,7 @@ function App() {
           <>
           <div className='top-bar'>
             <Profile />
-            <h1 id='app-header'>Playlist Analysis</h1>
+            <h1 id='app-header'>Spotify Playlist Analytics</h1>
             <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
           </div>
             <Playlists />
