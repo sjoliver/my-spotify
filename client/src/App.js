@@ -48,6 +48,7 @@ function App() {
           <Login />
         ) : (
           <>
+            <h1 id='app-header'>Playlist Analysis</h1>
             <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
             <Router>
               <ScrollToTop />
