@@ -6,8 +6,6 @@ import '../styles/Profile.css'
 const Profile = () => {
   const [profile, setProfile] = useState(null);
 
-  // console.log(profile.images)
-
   useEffect(() => {
     // getCurrentUserProfile returns a promise, we must use await to wait for the promise to be resoled -- we handle this by creating an async fn 
     const fetchData = async () => {
@@ -23,7 +21,6 @@ const Profile = () => {
 
   return (
     <>
-    <h1 id='app-header'>Playlist Analysis</h1>
       {profile && (
         <div className='profile-wrapper'>
           {profile.images.length && profile.images[0].url && (
@@ -31,9 +28,7 @@ const Profile = () => {
               <img className='profile-img' src={profile.images[0].url} alt="Avatar"/>
             </div>
           )}
-          <div>
-            <p>{profile.display_name}</p>
-          </div>
+            <h3 id='display-name'>{profile.display_name}</h3>
         </div>
       )}
     </>
