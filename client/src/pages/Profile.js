@@ -23,6 +23,7 @@ const Profile = () => {
 
   return (
     <>
+    <h1 id='app-header'>Playlist Analysis</h1>
       {profile && (
         <div className='profile-wrapper'>
           {profile.images.length && profile.images[0].url && (
@@ -31,10 +32,8 @@ const Profile = () => {
             </div>
           )}
           <div>
-            <h1>{profile.display_name}</h1>
-            <p>{profile.followers.total} Followers</p>
+            <p>{profile.display_name}</p>
           </div>
-          <a href="/playlists">Playlists</a>
         </div>
       )}
     </>
