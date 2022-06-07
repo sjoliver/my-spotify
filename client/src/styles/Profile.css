@@ -1,6 +1,11 @@
-#app-header {
-  text-align: center;
-  margin-top: 15px;
+#display-name {
+  margin: 0px;
+  padding-bottom: 3px;
+}
+
+#follower-count {
+  margin: 0px;
+  padding-top: 3px;
 }
 
 .profile-wrapper {
@@ -10,15 +15,15 @@
 }
 
 .profile-img {
-  height: 100px;
-  width: 65px;
+  height: 86px;
+  width: 55px;
 }
 
 .profile-img-wrapper {
   display: inline-block; 
   position: relative; 
-  width: 60px; 
-  height: 60px; 
+  width: 55px; 
+  height: 55px; 
   overflow: hidden; 
   border-radius: 50%; 
   margin: 15px;
@@ -27,3 +32,4 @@
 .profile-img-wrapper img {
   margin-top: -5px;
 }
+
