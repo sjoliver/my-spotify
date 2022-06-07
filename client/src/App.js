@@ -52,7 +52,6 @@ function App() {
             <Router>
               <ScrollToTop />
               <Routes>
-                <Route path="/playlists/:id" element={<h1>Playlist</h1>} />
                 <Route path="/playlists" element={<Playlists />} />
                 <Route path="/" element={<Profile />} />
               </Routes>
