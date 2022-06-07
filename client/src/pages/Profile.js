@@ -6,6 +6,8 @@ import '../styles/Profile.css'
 const Profile = () => {
   const [profile, setProfile] = useState(null);
 
+  console.log(profile)
+
   useEffect(() => {
     // getCurrentUserProfile returns a promise, we must use await to wait for the promise to be resoled -- we handle this by creating an async fn 
     const fetchData = async () => {
@@ -28,7 +30,10 @@ const Profile = () => {
               <img className='profile-img' src={profile.images[0].url} alt="Avatar"/>
             </div>
           )}
+          <div className='name-followers'>
             <h3 id='display-name'>{profile.display_name}</h3>
+            <p id='follower-count'>{profile.followers.total} Followers</p>
+          </div>
         </div>
       )}
     </>
