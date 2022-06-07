@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 import { accessToken, logout } from './spotify';
 import { Login, Profile, Playlists } from './pages';
+
 import { GlobalStyle } from './styles';
 import styled from 'styled-components/macro';
+import './styles/App.css'
 
 const StyledLogoutButton = styled.button`
   position: absolute;
@@ -22,16 +23,16 @@ const StyledLogoutButton = styled.button`
   }
 `;
 
-// scroll to top of page when changing routes
-function ScrollToTop() {
-  const { pathname } = useLocation();
+// // scroll to top of page when changing routes
+// function ScrollToTop() {
+//   const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0,0);
-  }, [pathname]);
+//   useEffect(() => {
+//     window.scrollTo(0,0);
+//   }, [pathname]);
 
-  return null;
-};
+//   return null;
+// };
 
 function App() {
   const [token, setToken] = useState(null);
@@ -43,20 +44,16 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-
         {!token ? (
           <Login />
         ) : (
           <>
+          <div className='top-bar'>
+            <Profile />
             <h1 id='app-header'>Playlist Analysis</h1>
             <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
-            <Router>
-              <ScrollToTop />
-              <Routes>
-                <Route path="/playlists" element={<Playlists />} />
-                <Route path="/" element={<Profile />} />
-              </Routes>
-            </Router>
+          </div>
+            <Playlists />
           </>
         )}
     </div>
