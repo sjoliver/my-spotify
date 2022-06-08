@@ -1,5 +1,5 @@
 .top-bar {
-  height: 56px;  
+  height: 70px;  
   width: 100%;  
   position: fixed; 
   z-index: 500; 
@@ -12,12 +12,13 @@
   justify-content: space-between;
   padding-left: 2em;
   padding-right: 2em;
-  margin-top: 1em;
+  border-bottom: 1px solid #545353;
 }
 
 #app-header {
   font-size: 28px;
-  padding-left: 10px;
+  font-family: 'Montserrat';
+  padding-left: 8px;
   font-weight: 500;
   margin-bottom: 0;
 }
