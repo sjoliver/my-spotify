@@ -7,10 +7,9 @@ import { GlobalStyle } from './styles';
 import styled from 'styled-components/macro';
 import './styles/App.css'
 
+import { BsSpotify } from 'react-icons/bs'
+
 const StyledLogoutButton = styled.button`
-  /* position: absolute;
-  top: var(--spacing-sm);
-  right: var(--spacing-md); */
   padding: var(--spacing-xs) var(--spacing-sm);
   background-color: rgba(0,0,0,.7);
   color: var(--white);
@@ -48,17 +47,16 @@ function App() {
           <Login />
         ) : (
           <>
-          <div className='top-bar'>
-            <div className='profile-wrapper'>
-              <Profile />
-            </div>
+          <section className='top-bar'>
             <div className='app-header-wrapper'>
-              <h1 id='app-header'>Spotify Playlist Analytics</h1>
+              <BsSpotify size={30} color={'#1ed760'} />
+              <p id='app-header'>Spotify Playlist Analytics</p>
             </div>
-            <div className='logout-btn-wrapper'>
+            <div className='profile-logout'>
+              <Profile />
               <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
             </div>
-          </div>
+          </section>
             <Playlists />
           </>
         )}
