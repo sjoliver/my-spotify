@@ -1,8 +1,15 @@
 .top-bar {
   display: flex;
+  box-sizing: border-box;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  flex-shrink: 0;
   margin-left: 2em;
   margin-right: 2em;
+  max-width: calc(935px + 40px);
+  width: 100%;
+}
+
+#app-header {
+  text-align: center;
 }
