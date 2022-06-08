@@ -49,9 +49,15 @@ function App() {
         ) : (
           <>
           <div className='top-bar'>
-            <Profile />
-            <h1 id='app-header'>Spotify Playlist Analytics</h1>
-            <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
+            <div className='profile-wrapper'>
+              <Profile />
+            </div>
+            <div className='app-header-wrapper'>
+              <h1 id='app-header'>Spotify Playlist Analytics</h1>
+            </div>
+            <div className='logout-btn-wrapper'>
+              <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
+            </div>
           </div>
             <Playlists />
           </>
