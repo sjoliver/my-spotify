@@ -5,6 +5,7 @@ import { catchErrors } from '../utils';
 import { getCurrentUserPlaylists } from '../spotify';
 
 import '../styles/Playlists.css'
+import TopSongs from './TopSongs'
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState();
@@ -12,6 +13,9 @@ const Playlists = () => {
   const [checkedPlaylists, setCheckedPlaylists] = useState({});
   const [topSongs, setTopSongs] = useState();
 
+  ///////////////
+  // PLAYLISTS //
+  ///////////////
   useEffect(() => {
     // getCurrentUserPlaylists returns a promise, we must use await to wait for the promise to be resolved -- we handle this by creating an async fn 
     const fetchData = async () => {
@@ -27,6 +31,9 @@ const Playlists = () => {
 
   }, []);
 
+  ///////////////
+  // PLAYLISTS //
+  ///////////////
   const handleChange = (position, id) => {
 
     // when a box is a checked, a new array for state is created
@@ -53,6 +60,9 @@ const Playlists = () => {
     }
   }
 
+  //////////////
+  // TOPSONGS //
+  //////////////
   // create array of playlist IDs > use playlist ID array to create endpoint array 
   let playlistIds = Object.values(checkedPlaylists)
   let playlistEndpoints = playlistIds.map(id => `/playlists/${id}`);
@@ -97,8 +107,6 @@ const Playlists = () => {
     catchErrors(getTracks());
   }
 
-  console.log('playlists', playlists)
-
   return (
     <>
       <div className='content-container'>
@@ -129,28 +137,7 @@ const Playlists = () => {
             <button className='submit-btn' type='submit'>Analyze</button>
           </form>
         </div>
-        {topSongs && 
-          <div className='topsongs-list-wrapper'>
-            <h2 className='titles' id='topsongs-title'>Top Songs</h2>
-            <div className='topsongs-container'>
-              {topSongs?.map((topSong, index)=> {
-                  return (
-                    <div key={topSong+index} role="row" className='track-row-wrapper'>
-                      <div className='track-row'>
-                        <div className='rank-number'><strong>{index + 1}</strong></div>
-                        <div className='album-cover'><img className='album-cover-img' src={topSong[2]} alt='Album Cover'/></div>
-                        <div className='track'>
-                          <div className='track-title'>{topSong[0]}</div>
-                          <div className='track-artist'>{topSong[3]}</div>
-                        </div>
-                        <div className='count-number'>{topSong[1]}</div>
-                      </div>
-                    </div>
-                  )
-              })}
-            </div>
-          </div>
-        }
+        <TopSongs topSongs={topSongs}/>
       </div>
     </>
   )
