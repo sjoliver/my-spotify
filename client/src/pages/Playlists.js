@@ -60,6 +60,8 @@ const Playlists = () => {
     }
   }
 
+  console.log(checkedPlaylists)
+
   //////////////
   // TOPSONGS //
   //////////////
@@ -128,7 +130,7 @@ const Playlists = () => {
                     />
                     <label htmlFor={`custom-checkbox-${index}`}>
                       <img className='album-cover-img' src={playlist.images[2].url} alt='Playlist Cover'/>
-                      {playlist.name}
+                      <span className='playlist-name'>{playlist.name}</span>
                     </label>
                   </li>
                 )
