@@ -1,15 +1,36 @@
 .top-bar {
-  display: flex;
-  box-sizing: border-box;
-  flex-direction: row;
+  height: 56px;  
+  width: 100%;  
+  position: fixed; 
+  z-index: 500; 
+  top: 0; 
+  left: 0; 
+  overflow-x: hidden; 
+  display: flex; 
+  flex-direction: row; 
   align-items: center;
-  flex-shrink: 0;
-  margin-left: 2em;
-  margin-right: 2em;
-  max-width: calc(935px + 40px);
-  width: 100%;
+  justify-content: space-between;
+  padding-left: 2em;
+  padding-right: 2em;
+  margin-top: 1em;
 }
 
 #app-header {
-  text-align: center;
+  font-size: 28px;
+  padding-left: 10px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.app-header-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile-logout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
