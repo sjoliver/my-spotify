@@ -49,7 +49,7 @@ function App() {
           <>
           <section className='top-bar'>
             <div className='app-header-wrapper'>
-              <BsSpotify size={30} color={'#1ed760'} />
+              <BsSpotify size={36} color={'#1ed760'} />
               <p id='app-header'>Spotify Playlist Analytics</p>
             </div>
             <div className='profile-logout'>
