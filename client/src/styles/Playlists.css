@@ -59,7 +59,13 @@ li.playlists-list-item {
   height: 60px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  transition: background-color 0.3s ease 0s
+}
+
+li.playlists-list-item:hover {
+  background-color: #5f5f5fd2;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  height: 60px;
 }
 
 input.checkbox-item {
@@ -68,13 +74,15 @@ input.checkbox-item {
 }
 
 input:checked + label {
-  color: red;
+  color: #1DB954;
 }
 
-li.playlists-list-item > input:checked + label {
-  background-color: blue;
-}
-
-span.playlist-name {
+.playlist-name {
+  font-size: 18px;
   font-weight: 600;
+  padding-left: 1em;
+}
+
+.submit-btn {
+  margin-right: 10px;
 }
