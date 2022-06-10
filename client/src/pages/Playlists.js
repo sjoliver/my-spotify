@@ -24,8 +24,6 @@ const Playlists = () => {
       setPlaylists(data);
     };
 
-    fetchData();
-
     // handles errors from async fn 
     catchErrors(fetchData());
 
@@ -59,8 +57,6 @@ const Playlists = () => {
       })
     }
   }
-
-  console.log(checkedPlaylists)
 
   //////////////
   // TOPSONGS //
@@ -114,28 +110,30 @@ const Playlists = () => {
       <div className='content-container'>
         <div className='form-wrapper'>
           <h2 className='titles'>Select Playlists</h2>
-          <form onSubmit={handleSubmit} className='form'>
-            <ul className='playlists-list'>
-              {playlists?.items.map((playlist, index) => {
-                return (
-                  <li key={playlist + index} className='playlists-list-item'>
-                    <input 
-                      type='checkbox'
-                      className='checkbox-item'
-                      id={`custom-checkbox-${index}`}
-                      name={playlist.name}
-                      value={playlist.name}
-                      checked={checkedState[index]}
-                      onChange={() => handleChange(index, playlist.id)}
-                    />
-                    <label htmlFor={`custom-checkbox-${index}`}>
-                      <img className='album-cover-img' src={playlist.images[2].url} alt='Playlist Cover'/>
-                      <span className='playlist-name'>{playlist.name}</span>
-                    </label>
-                  </li>
-                )
-              })}
-            </ul>
+          <form onSubmit={handleSubmit} className='playlists'>
+            <div className='playlists-list-wrapper'>
+              <ul className='playlists-list'>
+                {playlists?.items.map((playlist, index) => {
+                  return (
+                    <li key={playlist + index} className='playlists-list-item'>
+                      <input 
+                        type='checkbox'
+                        className='checkbox-item'
+                        id={`custom-checkbox-${index}`}
+                        name={playlist.name}
+                        value={playlist.name}
+                        checked={checkedState[index]}
+                        onChange={() => handleChange(index, playlist.id)}
+                      />
+                      <label htmlFor={`custom-checkbox-${index}`}>
+                        <img className='album-cover-img' src={playlist.images[2].url} alt='Playlist Cover'/>
+                        <span className='playlist-name'>{playlist.name}</span>
+                      </label>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
             <button className='submit-btn' type='submit'>Analyze</button>
           </form>
         </div>
