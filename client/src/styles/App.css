@@ -10,8 +10,8 @@
   flex-direction: row; 
   align-items: center;
   justify-content: space-between;
-  padding-left: 2em;
-  padding-right: 2em;
+  padding-left: 4em;
+  padding-right: 4em;
   border-bottom: 1px solid #545353;
 }
 
