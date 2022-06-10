@@ -1,4 +1,4 @@
-h2.titles {
+h1.titles {
   text-align: center;
   font-weight: 600;
 }
@@ -7,7 +7,9 @@ div.content-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 4em;
+  padding-top: 4em;
+  padding-right: 6em;
+  padding-left: 6em;
   margin-top: 3em;
 }
 
@@ -73,7 +75,6 @@ li.playlists-list-item > input:checked + label {
   background-color: blue;
 }
 
-button.submit-btn {
-  display: flex;
-  align-self: flex-end;
+span.playlist-name {
+  font-weight: 600;
 }
