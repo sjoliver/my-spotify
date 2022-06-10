@@ -27,7 +27,9 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     background-color: var(--black);
     color: var(--white);
-    font-family: var(--font);
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
     font-size: var(--fz-md);
   }
 
@@ -60,8 +62,8 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     font-family: inherit;
     border-radius: var(--border-radius-pill);
-    background-color: rgba(0,0,0,.7);
-    color: var(--white);
+    background-color: var(--green);
+    color: var(--black);
     font-size: var(--fz-sm);
     font-weight: 700;
     padding: var(--spacing-xs) var(--spacing-sm);
