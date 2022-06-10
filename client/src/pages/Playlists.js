@@ -74,8 +74,6 @@ const Playlists = () => {
 
     // concurrent GET requests using axios for each endpoint 
     const getTracks = async () => {
-
-      console.log("HEY")
       
       // playlists = array of playlist objects
       const playlists = await axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)));
