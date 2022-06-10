@@ -1,9 +1,9 @@
 .topsongs-headers {
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.316);
+  border-bottom: 1px solid #545353;
   padding: 5px;
-  color: rgba(255, 255, 255, 0.425);
+  color: #5f5e5e;
 }
 
 .rank-header {
@@ -72,10 +72,8 @@ div.topsongs-list-wrapper {
   width: fit-content;
   height: fit-content;
   padding: 1em;
+  padding-top: 0;
+  margin-left: 140px;
+  margin-right: 80px;
 }
 
-.playlist-name {
-  font-size: 18px;
-  font-weight: 500;
-  padding-left: 1em;
-}
