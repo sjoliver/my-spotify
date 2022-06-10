@@ -24,7 +24,7 @@ const Profile = () => {
       {profile && (
         <div className='profile-wrapper'>
           <div className='name-followers'>
-            <h3 id='display-name'>{profile.display_name}</h3>
+            <p id='display-name'>{profile.display_name}</p>
           </div>
           {profile.images.length && profile.images[0].url && (
             <div className='profile-img-wrapper'>
