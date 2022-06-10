@@ -70,8 +70,8 @@ const GlobalStyle = createGlobalStyle`
 
     &:hover,
     &:focus {
-      background-color: var(--dark-grey);
-      outline: 0;
+      text-decoration: none;
+      filter: brightness(1.1);
     }
   }
 
