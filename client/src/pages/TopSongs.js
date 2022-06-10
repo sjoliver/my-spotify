@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Playlists.css'
+import '../styles/TopSongs.css'
 
 const TopSongs = ({ topSongs }) => {
 
@@ -8,6 +8,11 @@ const TopSongs = ({ topSongs }) => {
       {topSongs && 
         <div className='topsongs-list-wrapper'>
           <h2 className='titles' id='topsongs-title'>Top Songs</h2>
+          <div className='topsongs-headers'>
+            <div className='rank-header'>#</div>
+            <div className='track-header'>TITLE</div>
+            <div className='count-header'>COUNT</div>
+          </div>
           <div className='topsongs-container'>
             {topSongs?.map((topSong, index)=> {
                 return (
