@@ -10,9 +10,29 @@ div.content-container {
   margin-top: 3em;
 }
 
+.form-wrapper {
+  width: 100%;
+}
+
+form.playlists {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.playlists-list-wrapper {
+  width: 100%;
+}
+
 ul.playlists-list {
-  list-style: none;
-  width: auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  list-style-type: none;
+}
+
+.content-container ul.playlists-list {
+  align-items: center;
 }
 
 ul.playlists-list li.playlists-list-item {
@@ -26,7 +46,7 @@ li.playlists-list-item {
   padding: 5px;
   padding-left: 0;
   margin: 10px;
-  width: 300px;
+  /* width: 300px; */
   height: 60px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
@@ -44,12 +64,6 @@ input:checked + label {
 
 li.playlists-list-item > input:checked + label {
   background-color: blue;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
 }
 
 button.submit-btn {
