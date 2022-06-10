@@ -12,10 +12,10 @@ const StyledLoginContainer = styled.main`
 const StyledLoginButton = styled.a`
   display: inline-block;
   background-color: var(--green);
-  color: var(--white);
+  color: var(--black);
   border-radius: var(--border-radius-pill);
   font-weight: 700;
-  font-size: var(--fz-lg);
+  font-size: var(--fz-xxl);
   padding: var(--spacing-sm) var(--spacing-xl);
 
   &:hover,
