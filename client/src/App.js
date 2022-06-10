@@ -9,19 +9,6 @@ import './styles/App.css'
 
 import { BsSpotify } from 'react-icons/bs'
 
-const StyledLogoutButton = styled.button`
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: rgba(0,0,0,.7);
-  color: var(--white);
-  font-size: var(--fz-sm);
-  font-weight: 700;
-  border-radius: var(--border-radius-pill);
-  z-index: 10;
-  @media (min-width: 768px) {
-    right: var(--spacing-lg);
-  }
-`;
-
 // // scroll to top of page when changing routes
 // function ScrollToTop() {
 //   const { pathname } = useLocation();
@@ -54,7 +41,7 @@ function App() {
             </div>
             <div className='profile-logout'>
               <Profile />
-              <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
+              <button onClick={logout}>Log Out</button>
             </div>
           </section>
             <Playlists />
