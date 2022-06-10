@@ -60,20 +60,22 @@ const Playlists = () => {
 
   //////////////
   // TOPSONGS //
-  //////////////
-  // create array of playlist IDs > use playlist ID array to create endpoint array 
-  let playlistIds = Object.values(checkedPlaylists)
-  let playlistEndpoints = playlistIds.map(id => `/playlists/${id}`);
-
+  /////////////
   // function to run after submit button is clicked
   // grabs selected playlists' data, counts duplicate records and sets the top songs state array
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // create array of playlist IDs > use playlist ID array to create endpoint array 
+    let playlistIds = Object.values(checkedPlaylists)
+    let playlistEndpoints = playlistIds.map(id => `/playlists/${id}`);
+
     let allTracks = {};
 
     // concurrent GET requests using axios for each endpoint 
     const getTracks = async () => {
+
+      console.log("HEY")
       
       // playlists = array of playlist objects
       const playlists = await axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)));
