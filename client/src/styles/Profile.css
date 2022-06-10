@@ -1,17 +1,14 @@
 #display-name {
   margin: 0px;
-  padding-bottom: 3px;
-}
-
-#follower-count {
-  margin: 0px;
-  padding-top: 3px;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .profile-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-right: 20px;
 }
 
 .profile-img {
