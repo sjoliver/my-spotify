@@ -6,6 +6,15 @@
   color: rgba(255, 255, 255, 0.425);
 }
 
+.rank-header {
+  width: 15px;
+  margin-right: 25px;
+}
+
+.count-header {
+  margin-left: 440px;
+}
+
 .topsongs-container {
   width: 100%;
 }
@@ -46,12 +55,13 @@
 
 .track {
   width: 400px;
-  margin-right: 25px;
+  margin-right: 45px;
 }
 
 .track-title {
   font-weight: 600;
   margin-bottom: 5px;
+  font-size: 18px;
 }
 
 .track-artist {
