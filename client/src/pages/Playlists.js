@@ -126,7 +126,7 @@ const Playlists = () => {
                         onChange={() => handleChange(index, playlist.id)}
                       />
                       <label htmlFor={`custom-checkbox-${index}`}>
-                        <img className='album-cover-img' src={playlist.images[2].url} alt='Playlist Cover'/>
+                        <img className='playlist-cover-img' src={playlist.images[2].url} alt='Playlist Cover'/>
                         <span className='playlist-name'>{playlist.name}</span>
                       </label>
                     </li>
