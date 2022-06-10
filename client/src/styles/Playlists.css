@@ -1,5 +1,6 @@
 h2.titles {
   text-align: center;
+  font-weight: 600;
 }
 
 div.content-container {
@@ -39,6 +40,13 @@ ul.playlists-list li.playlists-list-item {
   float: left;
 }
 
+.playlist-cover-img {
+  height: 60px;
+  width: 60px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
 li.playlists-list-item {
   display: flex;
   flex-direction: row;
@@ -46,7 +54,6 @@ li.playlists-list-item {
   padding: 5px;
   padding-left: 0;
   margin: 10px;
-  /* width: 300px; */
   height: 60px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
@@ -69,70 +76,4 @@ li.playlists-list-item > input:checked + label {
 button.submit-btn {
   display: flex;
   align-self: flex-end;
-}
-
-.topsongs-container {
-  width: 80%;
-}
-
-.track-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
-  height: 70px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  height: 90px;
-}
-
-.track-row:hover {
-  background-color: #282828;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  height: 90px;
-}
-
-.rank-number {
-  width: 15px;
-  margin-right: 25px;
-}
-
-.album-cover {
-  width: 100px;
-  margin-right: 5px;
-}
-
-.album-cover-img {
-  height: 60px;
-  width: 60px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
-.track {
-  width: 400px;
-  margin-right: 25px;
-}
-
-.track-title {
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.track-artist {
-  color: #b3b3b3;
-}
-
-div.topsongs-list-wrapper {
-  width: fit-content;
-  height: fit-content;
-  padding: 1em;
-}
-
-.playlist-name {
-  font-size: 18px;
-  font-weight: 500;
-  padding-left: 1em;
 }

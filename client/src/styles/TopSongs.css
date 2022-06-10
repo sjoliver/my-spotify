@@ -1,0 +1,71 @@
+.topsongs-headers {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.316);
+  padding: 5px;
+  color: rgba(255, 255, 255, 0.425);
+}
+
+.topsongs-container {
+  width: 100%;
+}
+
+.track-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  height: 70px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  height: 90px;
+}
+
+.track-row:hover {
+  background-color: #282828;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  height: 90px;
+}
+
+.rank-number {
+  width: 15px;
+  margin-right: 25px;
+}
+
+.album-cover {
+  width: max-content;
+  margin-right: 15px;
+}
+
+.album-cover-img {
+  height: 60px;
+  width: 60px;
+}
+
+.track {
+  width: 400px;
+  margin-right: 25px;
+}
+
+.track-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.track-artist {
+  color: #b3b3b3;
+}
+
+div.topsongs-list-wrapper {
+  width: fit-content;
+  height: fit-content;
+  padding: 1em;
+}
+
+.playlist-name {
+  font-size: 18px;
+  font-weight: 500;
+  padding-left: 1em;
+}
