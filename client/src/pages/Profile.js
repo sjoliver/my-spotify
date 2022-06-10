@@ -6,8 +6,6 @@ import '../styles/Profile.css'
 const Profile = () => {
   const [profile, setProfile] = useState(null);
 
-  console.log(profile)
-
   useEffect(() => {
     // getCurrentUserProfile returns a promise, we must use await to wait for the promise to be resoled -- we handle this by creating an async fn 
     const fetchData = async () => {
