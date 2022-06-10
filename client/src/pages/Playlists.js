@@ -109,7 +109,7 @@ const Playlists = () => {
     <>
       <div className='content-container'>
         <div className='form-wrapper'>
-          <h2 className='titles'>Select Playlists</h2>
+          <h1 className='titles'>Select Playlists</h1>
           <form onSubmit={handleSubmit} className='playlists'>
             <div className='playlists-list-wrapper'>
               <ul className='playlists-list'>
