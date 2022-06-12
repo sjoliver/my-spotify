@@ -4,7 +4,6 @@ import { accessToken, logout } from './spotify';
 import { Login, Profile, Playlists } from './pages';
 
 import { GlobalStyle } from './styles';
-import styled from 'styled-components/macro';
 import './styles/App.css'
 
 import { BsSpotify } from 'react-icons/bs'
