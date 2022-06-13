@@ -3,9 +3,8 @@ dotenv.config()
 
 import express from 'express' 
 const app = express();
-const port = 8888;
 
-const path = require('path');
+import path from 'path';
 
 import querystring from 'querystring'
 import axios from 'axios';
