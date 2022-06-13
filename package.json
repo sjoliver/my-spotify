@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "12.x",
+    "npm": "8.x"
+  },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
