@@ -27,7 +27,7 @@ const StyledLoginButton = styled.a`
 
 const Login = () => (
   <StyledLoginContainer>
-    <StyledLoginButton href="http://localhost:8888/login">
+    <StyledLoginButton href="https://spotify-playlist-analytics.herokuapp.com/login">
       Log in to Spotify
     </StyledLoginButton>
   </StyledLoginContainer>
