@@ -5,14 +5,13 @@ import express from 'express'
 const app = express();
 const port = 8888;
 
-// import path from 'path';
+import path from 'path';
 
 import querystring from 'querystring'
 import axios from 'axios';
 
-// //This will create a middleware.
-// //When you navigate to the root page, it would use the built react-app
-// app.use(express.static(path.resolve(__dirname, "./client/build")));
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, './client/build')));
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -126,6 +125,10 @@ app.get('/refresh_token', (req, res) => {
     });
 });
 
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Express app listening at http://localhost:${PORT}`);
