@@ -86,10 +86,8 @@ const Playlists = () => {
 
         for (const song of trackArr) {
           if (allTracks[song.track.id]) {
-            console.log('here')
             allTracks[song.track.id][1] += 1
           } else {
-            console.log('no here', song)
             allTracks[song.track.id] = [song.track.name, 1, song.track.album.images[2].url, song.track.artists[0].name]
           }
         }
