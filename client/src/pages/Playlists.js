@@ -68,7 +68,7 @@ const Playlists = () => {
 
     // create array of playlist IDs > use playlist ID array to create endpoint array 
     let playlistIds = Object.values(checkedPlaylists)
-    let playlistEndpoints = playlistIds.map(id => `/playlists/${id}`);
+    let trackEndpoints = playlistIds.map(id => `/playlists/${id}/tracks`);
 
     let allTracks = {};
 
@@ -76,19 +76,21 @@ const Playlists = () => {
     const getTracks = async () => {
       
       // playlists = array of playlist objects
-      const playlists = await axios.all(playlistEndpoints.map((endpoint) => axios.get(endpoint)));
+      const playlistTracks = await axios.all(trackEndpoints.map((endpoint) => axios.get(endpoint)));
 
       // loop through each playlist
-      for (let playlist of playlists) {
+      for (let tracks of playlistTracks) {
 
         // playlist.data.tracks.items = array of track objects
-        let trackArr = playlist.data.tracks.items; 
+        let trackArr = tracks.data.items; 
 
         for (const song of trackArr) {
           if (allTracks[song.track.id]) {
+            console.log('here')
             allTracks[song.track.id][1] += 1
           } else {
-            allTracks[song.track.id] = [song.track.name, 1, song.track.album.images[2].url,song.track.artists[0].name]
+            console.log('no here', song)
+            allTracks[song.track.id] = [song.track.name, 1, song.track.album.images[2].url, song.track.artists[0].name]
           }
         }
       }
