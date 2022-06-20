@@ -5,6 +5,8 @@ Users select playlists to analyze and the program outputs the Top 10 most common
 
 Motivation: built for a friend who creates playlists for clients and was curious to see which songs popped up the most frequently. 
 
+## App Overview
+
 ### Users can login using their Spoitfy credentials
 
 Login landing page             |  Spotify login
