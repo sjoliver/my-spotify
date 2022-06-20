@@ -7,7 +7,7 @@ Motivation: built for a friend who creates playlists for clients and was curious
 
 ## App Overview
 
-### Users can login using their Spoitfy credentials
+### Users login using their Spoitfy credentials
 
 Login landing page             |  Spotify login
 :-------------------------:|:-------------------------:
