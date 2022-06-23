@@ -5,14 +5,8 @@ import express from 'express'
 const app = express();
 const port = 8888;
 
-// import path from 'path';
-
 import querystring from 'querystring'
 import axios from 'axios';
-
-// //This will create a middleware.
-// //When you navigate to the root page, it would use the built react-app
-// app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -58,7 +52,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/callback', (req, res) => {
-  // authorization code included in request query params in stored inside 'code' variable
+  // authorization code included in request query params is stored inside 'code' variable
   const code = req.query.code || null;
 
   // use authorization code to request access token by sending a post request to /api/token
@@ -121,7 +115,6 @@ app.get('/refresh_token', (req, res) => {
       res.send(error);
     });
 });
-
 
 app.listen(port, () => {
   console.log(`Express app listening at http://localhost:${port}`);
