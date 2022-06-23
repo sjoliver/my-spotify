@@ -26,7 +26,6 @@ const Playlists = () => {
 
     // handles errors from async fn 
     catchErrors(fetchData());
-
   }, []);
 
   ///////////////
@@ -105,6 +104,8 @@ const Playlists = () => {
     catchErrors(getTracks());
   }
 
+  console.log(playlists)
+
   return (
     <>
       <div className='content-container'>
@@ -126,7 +127,9 @@ const Playlists = () => {
                         onChange={() => handleChange(index, playlist.id)}
                       />
                       <label htmlFor={`custom-checkbox-${index}`}>
-                        <img className='playlist-cover-img' src={playlist.images[2].url} alt='Playlist Cover'/>
+                        {playlist.images[0] &&
+                          <img className='playlist-cover-img' src={playlist.images[0].url} alt='Playlist Cover'/>
+                        }
                         <span className='playlist-name'>{playlist.name}</span>
                       </label>
                     </li>
