@@ -26,6 +26,17 @@
   margin: 15px;
 }
 
+.egghead-wrapper {
+  display: inline-block; 
+  position: relative; 
+  width: 36px; 
+  height: 36px; 
+  overflow: hidden; 
+  border-radius: 50%; 
+  margin: 15px;
+  padding-top: 3px;
+}
+
 .profile-img-wrapper img {
   margin-top: -5px;
 }
